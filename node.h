@@ -5,7 +5,7 @@ private:
   int value;
 
   Node *nextPtr;
-  //  Node *pPtr; // for doubly linked list
+  Node *pPtr;
 public:
   Node(int x = 0);
   ~Node();
@@ -13,19 +13,17 @@ public:
   int get_data();
   void set_next(Node *t);
   void print();
+  void set_prev(Node *t);
+  Node* get_prev();
 
-  // for doubly linked list
-  /*
-  Node * get_prev();
-  void set_prev(Node* t);
-  */
 };
 
-typedef Node *NodePtr; // synonym for Node*
+typedef Node *NodePtr;
 
 Node::Node(int x) {
   value = x;
   nextPtr = NULL;
+  pPtr = NULL;
 }
 
 Node::~Node() { cout << value << " deleted" << endl; }
@@ -36,6 +34,16 @@ int Node::get_data() { return value; }
 
 void Node::set_next(NodePtr t) {
   this->nextPtr = t; 
+}
+
+void Node::set_prev(NodePtr t)
+{
+  this->pPtr=t;
+}
+
+NodePtr Node::get_prev()
+{
+  return pPtr;
 }
 
 void Node::print(){

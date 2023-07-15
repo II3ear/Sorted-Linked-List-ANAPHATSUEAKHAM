@@ -13,10 +13,33 @@ public:
  
   ~LL();
 /* With doubly linked list*/
-/*
- void printListR();
-*/
+
+void printListR();
+
 };
+void LL::printListR()
+{
+  NodePtr currentPtr=hol;
+  if(size==0)
+  {
+    cout<<"List is empty"<<endl;
+  }
+  else{
+    cout<<"The reverse list is: "<<endl;
+    int i;
+    for(i=0;i<size-1;i++)
+      {
+        currentPtr = currentPtr->get_next();
+      }
+    for(i=0;i<size;i++){
+        currentPtr->print();
+        cout<<" ->";
+        currentPtr=currentPtr->get_prev();
+    }
+    puts("NULL\n");
+        
+  }
+}
 
 LL::LL() {
   this->hol = NULL;
@@ -57,13 +80,18 @@ void LL::insert(int value) {
     // insert new node at beginning of list
     if (previousPtr == NULL) {
         newPtr->set_next(hol);
+      if(hol)
+        hol->set_prev(newPtr);
         hol = newPtr;
-       
       }  // end if
     else { 
       // insert new node between previousPtr and currentPtr
       previousPtr->set_next(newPtr);
+      newPtr->set_prev(previousPtr);
       newPtr->set_next(currentPtr);
+      if(currentPtr)
+      currentPtr->set_prev(newPtr);
+      
     } // end else
     ++size;
   } // end if
@@ -82,6 +110,7 @@ int LL::deletes(int value) {
   if (value == hol->get_data()) {
     tempPtr = hol;         // hold onto node being removed
     hol = hol->get_next(); // de-thread the node
+    //hol->set_prev(NULL);
     size--;
 
     delete tempPtr; // free the de-threaded node
@@ -105,6 +134,8 @@ int LL::deletes(int value) {
       tempPtr = currentPtr;
       previousPtr->set_next(currentPtr->get_next());
       currentPtr = currentPtr->get_next();
+      if(currentPtr)
+      currentPtr->set_prev(previousPtr);
     
       delete tempPtr;
       size--;

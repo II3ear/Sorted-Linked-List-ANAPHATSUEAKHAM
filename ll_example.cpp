@@ -25,6 +25,7 @@ int main( void )
             cin>> item ;
             l.insert( item ); // insert item in list
             l.printList();//print the list out
+            l.printListR();
         
             break;
          case 2: // delete an element
@@ -37,6 +38,7 @@ int main( void )
                if ( item==l.deletes( item ) ) { // remove item
                 // cout<<item << " deleted.\n";
                   l.printList( );
+                 l.printListR();
                } // end if
                else {
                   cout<<item<<" not found.\n\n";
